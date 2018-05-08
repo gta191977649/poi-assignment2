@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 2 load the theme CSS file -->
+    <link rel="stylesheet" href="js/themes/default/style.css" />
+
+</head>
+
+<body>
+    <!-- 3 setup a container element -->
+    <div id="jstree">
+        <!-- in this example the tree is populated from inline HTML -->
+        <ul>
+            <li>Root node 1
+                <ul>
+                    <li id="child_node_1">Child node 1</li>
+                    <li>Child node 2</li>
+                </ul>
+            </li>
+            <li>Root node 2</li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+       
+    </script>
+    <script src="js/jstree.js"></script>
+    <script>
+        $(function () {
+            // 6 create an instance when the DOM is ready
+            $('#jstree').jstree();
+            // 7 bind to events triggered on the tree
+            $('#jstree').on("changed.jstree", function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]).text);
+                }
+                alert(r.join(', '))
+            });
+            // 8 interact with the tree - either way is OK
+            $('button').on('click', function () {
+                $('#jstree').jstree(true).select_node('child_node_1');
+                $('#jstree').jstree('select_node', 'child_node_1');
+                $.jstree.reference('#jstree').select_node('child_node_1');
+            });
+        });
+    </script>
+    <!-- 
+        Ref
+        Jstree.com. (n.d.). jstree. [online] Available at: https://www.jstree.com/ [Accessed 8 May 2018].ß
+    -->
+</body>
+
+</html>
