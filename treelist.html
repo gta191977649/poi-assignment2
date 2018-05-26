@@ -57,7 +57,8 @@
             var productXMLNodes = productXML.getElementsByTagName("Products");
 
 
-            var listULElement = listDiv.appendChild(document.createElement("ul"));
+            var listULElement = listDiv.appendChild(document.createElement("ol"));
+            listULElement.setAttribute("type","i");
             for (var i = 0; i < catXMLNodes.length; i++) {
                 var cat = catXMLNodes[i];
                 //该分类的名称
@@ -68,6 +69,8 @@
                 //listDiv.innerHTML = "<li>" + catName + "</li>";
                 //生成<li></li>标签
                 var listLIElement = listULElement.appendChild(document.createElement("li"));
+
+                
                 //套入文字到li标签里面
                 var textLIElement = listLIElement.appendChild(document.createTextNode(catName));
 
@@ -76,8 +79,10 @@
                 ULInSecondList.appendChild(document.createTextNode("sss"));
                 */
 
+                
+                var ULInSecondList = listLIElement.appendChild(document.createElement("ol"));
+                ULInSecondList.setAttribute("type","a");
                 //找出该分类中的全部产品
-
                 for (var j = 0; j < productXMLNodes.length; j++) {
 
                     var product = productXMLNodes[j];
@@ -86,11 +91,11 @@
                     var productCatID = product.getElementsByTagName("CategoryID")[0].childNodes[0].nodeValue;
                     //获取产品的名称
                     var productName = product.getElementsByTagName("ProductName")[0].childNodes[0].nodeValue;
-
+                    
                     //判断如果有找到该分类的产品,添加到子节点
                     if (parseInt(productCatID) == parseInt(catID)) {
                         //在最开始创建一个ul标签
-                        var ULInSecondList = listLIElement.appendChild(document.createElement("ul"));
+                        
                         var LIINSecoundList = ULInSecondList.appendChild(document.createElement("li"));
                         //att.value = productID;
                         LIINSecoundList.appendChild(document.createTextNode(productName));
